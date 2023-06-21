@@ -27,3 +27,12 @@ class UsersDB:
     
     def get_all_users(self):
         return self.users.all()
+
+
+class SmartphonesDB:
+    def __init__(self):
+        self.db = TinyDB('db/smartphones.json', indent=4)
+
+    def get_brends(self):
+        return self.db.tables()
+        

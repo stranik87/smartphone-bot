@@ -1,8 +1,9 @@
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from callbacks import (
     start,
     users,
+    shop,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -19,6 +20,7 @@ def main():
     # add handlers
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('users', users))
+    dp.add_handler(MessageHandler(Filters.text('🛍 Shop'), shop))
 
     # start polling 
     updater.start_polling()
