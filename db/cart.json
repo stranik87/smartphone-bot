@@ -1,0 +1,14 @@
+{
+    "cart": {
+        "1": {
+            "user_id": 1258594598,
+            "brend": "Samsung",
+            "phone": "37"
+        },
+        "2": {
+            "user_id": 1258594598,
+            "brend": "Samsung",
+            "phone": "69"
+        }
+    }
+}

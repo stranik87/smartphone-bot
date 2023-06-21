@@ -2,11 +2,12 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKe
 from telegram.ext import CallbackContext
 
 # import db
-from db import UsersDB, SmartphonesDB
+from db import UsersDB, SmartphonesDB, CartDB
 
 # create db obj
 usersDB = UsersDB()
 smartphonesDB = SmartphonesDB()
+cartDB = CartDB()
 
 
 def start(update: Update, context: CallbackContext):
@@ -101,4 +102,20 @@ def phone(update: Update, context: CallbackContext):
         f'<b>Ram:</b> {smartphone["RAM"]}',
         parse_mode='HTML',
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Add to Cart', callback_data=f'add:{brend}-{phone}')]])
+    )
+
+
+def add_cart(update: Update, context: CallbackContext):
+    # get brend and phone from callback_data
+    brend, phone = update.callback_query.data.split(':')[1].split('-')
+    # get smartphone from database
+    smartphone = smartphonesDB.db.table(brend).get(doc_id=phone)
+    # send smartphone as message
+    cartDB.add_item(
+        user_id=update.effective_user.id,
+        brend=brend,
+        phone=phone,
+    )
+    update.callback_query.message.reply_html(
+        text=f'<b>{smartphone["name"]}</b> #{phone} added to cart.',
     )

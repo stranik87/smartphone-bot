@@ -39,3 +39,24 @@ class SmartphonesDB:
     def get_smartphones(self, brend):
         table = self.db.table(brend)
         return table.all()
+
+
+class CartDB:
+    def __init__(self):
+        self.db = TinyDB('db/cart.json', indent=4)
+        self.cart = self.db.table('cart')
+
+    def add_item(self, user_id, brend, phone):
+        self.cart.insert(
+            {
+                "user_id": user_id,
+                "brend": brend,
+                "phone": phone
+            }
+        )
+
+    def get_items(self, user_id):
+        return self.cart.search(Query().user_id == user_id)
+
+    def remove_items(self, user_id):
+        self.cart.remove(Query().user_id == user_id)
