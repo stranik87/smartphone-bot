@@ -84,3 +84,22 @@ def smartphone(update: Update, context: CallbackContext):
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
+
+def phone(update: Update, context: CallbackContext):
+    # get brend and phone from callback_data
+    brend, phone = update.callback_query.data.split(':')[1].split('-')
+    # get smartphone from database
+    smartphone = smartphonesDB.db.table(brend).get(doc_id=phone)
+    # send smartphone as message
+    update.callback_query.message.reply_photo(
+        photo=smartphone['img_url'],
+        caption=f'<b>Smartphone {smartphone.doc_id}</b>\n\n' +
+        f'<b>Model:</b> {smartphone["name"]}\n'
+        f'<b>Brend:</b> {smartphone["company"]}\n' +
+        f'<b>Price:</b> {smartphone["price"]}\n' +
+        f'<b>Memeory:</b> {smartphone["memory"]}\n' +
+        f'<b>Color:</b> {smartphone["color"]}\n' +
+        f'<b>Ram:</b> {smartphone["RAM"]}',
+        parse_mode='HTML',
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Add to Cart', callback_data=f'add:{brend}-{phone}')]])
+    )

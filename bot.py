@@ -5,6 +5,7 @@ from callbacks import (
     users,
     shop,
     smartphone,
+    phone,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -23,6 +24,7 @@ def main():
     dp.add_handler(CommandHandler('users', users))
     dp.add_handler(MessageHandler(Filters.text('🛍 Shop'), shop))
     dp.add_handler(CallbackQueryHandler(smartphone, pattern='brend:'))
+    dp.add_handler(CallbackQueryHandler(phone, pattern='phone:'))
 
     # start polling 
     updater.start_polling()
