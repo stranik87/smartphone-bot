@@ -93,8 +93,7 @@ def phone(update: Update, context: CallbackContext):
     # send smartphone as message
     update.callback_query.message.reply_photo(
         photo=smartphone['img_url'],
-        caption=f'<b>Smartphone {smartphone.doc_id}</b>\n\n' +
-        f'<b>Model:</b> {smartphone["name"]}\n'
+        caption=f'<b>{smartphone["name"]}</b> #{phone}\n\n' +
         f'<b>Brend:</b> {smartphone["company"]}\n' +
         f'<b>Price:</b> {smartphone["price"]}\n' +
         f'<b>Memeory:</b> {smartphone["memory"]}\n' +
