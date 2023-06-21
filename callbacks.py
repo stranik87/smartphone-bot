@@ -62,3 +62,25 @@ def shop(update: Update, context: CallbackContext):
         text='<b>Available Brends</b>\n\n',
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
+
+
+def smartphone(update: Update, context: CallbackContext):
+    # get brend from callback_data
+    brend = update.callback_query.data.split(':')[1]
+    # get all smartphones from brend
+    smartphones = smartphonesDB.get_smartphones(brend)
+    # keyboards
+    keyboard = []
+    row = []
+    for phone in smartphones:
+        row.append(InlineKeyboardButton(text=f"{phone.doc_id}",callback_data=f'phone:{brend}-{phone.doc_id}'))
+        if len(row)==8:
+            keyboard.append(row)
+            row = []
+    keyboard.append(row)
+    # send smartphones as message
+    update.callback_query.message.reply_html(
+        text=f'<b>Available Smartphones from {brend}</b>\n\n',
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
+

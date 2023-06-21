@@ -1,9 +1,10 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 import os
 from callbacks import (
     start,
     users,
     shop,
+    smartphone,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -21,6 +22,7 @@ def main():
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('users', users))
     dp.add_handler(MessageHandler(Filters.text('🛍 Shop'), shop))
+    dp.add_handler(CallbackQueryHandler(smartphone, pattern='brend:'))
 
     # start polling 
     updater.start_polling()

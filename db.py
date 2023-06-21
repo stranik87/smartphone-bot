@@ -35,4 +35,7 @@ class SmartphonesDB:
 
     def get_brends(self):
         return self.db.tables()
-        
+
+    def get_smartphones(self, brend):
+        table = self.db.table(brend)
+        return table.all()
