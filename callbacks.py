@@ -119,3 +119,14 @@ def add_cart(update: Update, context: CallbackContext):
     update.callback_query.message.reply_html(
         text=f'<b>{smartphone["name"]}</b> #{phone} added to cart.',
     )
+
+def contact(update:Update,context:CallbackContext):
+    keyboard = [
+        ['phone number','email'],
+        ['location','about']
+    ]
+    reply_markup = ReplyKeyboardMarkup(keyboard,resize_keyboard=True)
+    update.message.reply_text(
+        text='boglanish',
+        reply_markup=reply_markup
+    )
