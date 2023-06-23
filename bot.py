@@ -8,6 +8,7 @@ from callbacks import (
     phone,
     add_cart,
     cart,
+    clear_cart,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -29,6 +30,7 @@ def main():
     dp.add_handler(CallbackQueryHandler(smartphone, pattern='brend:'))
     dp.add_handler(CallbackQueryHandler(phone, pattern='phone:'))
     dp.add_handler(CallbackQueryHandler(add_cart, pattern='add:'))
+    dp.add_handler(CallbackQueryHandler(clear_cart, pattern='clear'))
 
     # start polling 
     updater.start_polling()

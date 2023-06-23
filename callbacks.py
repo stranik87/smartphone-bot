@@ -143,3 +143,12 @@ def cart(update: Update, context: CallbackContext):
         text=text,
         reply_markup=InlineKeyboardMarkup(Keyboard)
     )
+
+
+def clear_cart(update: Update, context: CallbackContext):
+    # clear cart
+    cartDB.remove_items(update.effective_user.id)
+    # send message
+    update.callback_query.message.reply_html(
+        text='Cart cleared.'
+    )
