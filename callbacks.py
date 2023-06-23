@@ -170,3 +170,26 @@ def about_info(update:Update,context:CallbackContext):
     update.message.reply_html(
         text=about
     )
+def cart(update:Update, context:CallbackContext):
+    items = cartDB.get_items(update.effective_user.id)
+    
+    text = '<b>Available Items in Cart</b>\n\n'
+    
+    n = 1
+    
+    total = 0
+    for item in items:
+        product = smartphonesDB.get_smartphones(item['brend'],item['phone'])
+        text += f"{n}. {product['name']} price {product['price']}"
+        total += product['price']
+        n+=1    
+        text += f"/nTotal:{total}"
+        
+        keyboard = [
+            [InlineKeyboardButton('Buy',callback_data='buy'), InlineKeyboardButton('Clear',callback_data='clear')]
+        ]
+        
+        update.message.reply_html(
+            text=text,
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )

@@ -14,6 +14,7 @@ from callbacks import (
     adres_info,
     back_to_home,
     about_info,
+    cart,
 )
 
 TOKEN = os.environ.get('TOKEN')
