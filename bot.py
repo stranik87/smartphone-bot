@@ -13,6 +13,7 @@ from callbacks import (
     location_info,
     adres_info,
     back_to_home,
+    about_info,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -39,6 +40,7 @@ def main():
     dp.add_handler(MessageHandler(Filters.text('📍 Location'),location_info))
     dp.add_handler(MessageHandler(Filters.text('📌 Address'),adres_info))
     dp.add_handler(MessageHandler(Filters.text('🏠 Back to HOME'),back_to_home))
+    dp.add_handler(MessageHandler(Filters.text('📝 About'),about_info))
 
     # start polling 
     updater.start_polling()

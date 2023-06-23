@@ -1,6 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
-from messages import address
+from messages import address,about
 # import db
 from db import UsersDB, SmartphonesDB, CartDB
 
@@ -165,3 +165,8 @@ def back_to_home(update:Update, context:CallbackContext):
         text='back to home',
         reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
         )
+    
+def about_info(update:Update,context:CallbackContext):
+    update.message.reply_html(
+        text=about
+    )
