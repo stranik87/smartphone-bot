@@ -10,35 +10,10 @@
             "brend": "Samsung",
             "phone": "69"
         },
-        "3": {
-            "user_id": 5653874552,
-            "brend": "Apple",
-            "phone": "15"
-        },
-        "4": {
-            "user_id": 5653874552,
-            "brend": "Apple",
-            "phone": "20"
-        },
         "5": {
             "user_id": 1258594598,
             "brend": "Nokia",
             "phone": "6"
-        },
-        "6": {
-            "user_id": 5653874552,
-            "brend": "Vivo",
-            "phone": "19"
-        },
-        "7": {
-            "user_id": 5653874552,
-            "brend": "Oppo",
-            "phone": "12"
-        },
-        "8": {
-            "user_id": 5653874552,
-            "brend": "Oppo",
-            "phone": "12"
         }
     }
 }

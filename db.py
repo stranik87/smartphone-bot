@@ -40,6 +40,10 @@ class SmartphonesDB:
         table = self.db.table(brend)
         return table.all()
 
+    def get_smartphone(self, brend, phone):
+        table = self.db.table(brend)
+        return table.get(doc_id=phone)
+
 
 class CartDB:
     def __init__(self):
