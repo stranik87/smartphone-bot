@@ -1,6 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
-
+from messages import address
 # import db
 from db import UsersDB, SmartphonesDB, CartDB
 
@@ -122,11 +122,35 @@ def add_cart(update: Update, context: CallbackContext):
 
 def contact(update:Update,context:CallbackContext):
     keyboard = [
-        ['phone number','email'],
-        ['location','about']
+        ['📞 Phone number','📧 Email'],
+        ['📍 Location','📌 Address'],
+        ['🏠 Back to HOME']
     ]
     reply_markup = ReplyKeyboardMarkup(keyboard,resize_keyboard=True)
     update.message.reply_text(
         text='boglanish',
         reply_markup=reply_markup
     )
+def phone_number(update:Update, context:CallbackContext):
+    
+    text ='''
+        Our phone numbers:
+        +998661234567,
+        +998661234567
+        '''
+    update.message.reply_text(
+        text=text.replace(' ','')
+    )
+
+def email_info(update:Update,context:CallbackContext):
+    update.message.reply_text(
+        text='fdavidl073+q5bum@gmail.com'
+    )
+
+def location_info(update:Update,context:CallbackContext):
+    latitude = 51.5074,
+    longitude= 0.1278
+    update.message.reply_location(latitude=latitude, longitude=longitude)
+    
+def adres_info(update:Update,context:CallbackContext):
+    update.message.reply_text(address)

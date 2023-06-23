@@ -8,6 +8,10 @@ from callbacks import (
     phone,
     add_cart,
     contact,
+    phone_number,
+    email_info,
+    location_info,
+    adres_info,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -29,6 +33,11 @@ def main():
     dp.add_handler(CallbackQueryHandler(phone, pattern='phone:'))
     dp.add_handler(CallbackQueryHandler(add_cart, pattern='add:'))
     dp.add_handler(MessageHandler(Filters.text('📞 Contact'),contact))
+    dp.add_handler(MessageHandler(Filters.text('📞 Phone number'),phone_number))
+    dp.add_handler(MessageHandler(Filters.text('📧 Email'),email_info))
+    dp.add_handler(MessageHandler(Filters.text('📍 Location'),location_info))
+    dp.add_handler(MessageHandler(Filters.text('📌 Address'),adres_info))
+    dp.add_handler(MessageHandler(Filters.text('🏠 Back to HOME'),start))
 
     # start polling 
     updater.start_polling()
