@@ -154,3 +154,14 @@ def location_info(update:Update,context:CallbackContext):
     
 def adres_info(update:Update,context:CallbackContext):
     update.message.reply_text(address)
+    
+def back_to_home(update:Update, context:CallbackContext):
+    keyboard = [
+        ['🛍 Shop', '🛒 Cart'],
+        ['📞 Contact', '📝 About']
+    ]
+    
+    update.message.reply_html(
+        text='back to home',
+        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+        )
