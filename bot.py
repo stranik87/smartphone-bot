@@ -7,6 +7,7 @@ from callbacks import (
     smartphone,
     phone,
     add_cart,
+    cart,
 )
 
 TOKEN = os.environ.get('TOKEN')
@@ -24,6 +25,7 @@ def main():
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('users', users))
     dp.add_handler(MessageHandler(Filters.text('🛍 Shop'), shop))
+    dp.add_handler(MessageHandler(Filters.text('🛒 Cart'), cart))
     dp.add_handler(CallbackQueryHandler(smartphone, pattern='brend:'))
     dp.add_handler(CallbackQueryHandler(phone, pattern='phone:'))
     dp.add_handler(CallbackQueryHandler(add_cart, pattern='add:'))

@@ -1,4 +1,4 @@
-from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, KeyboardButton
 from telegram.ext import CallbackContext
 
 # import db
@@ -118,4 +118,28 @@ def add_cart(update: Update, context: CallbackContext):
     )
     update.callback_query.message.reply_html(
         text=f'<b>{smartphone["name"]}</b> #{phone} added to cart.',
+    )
+
+
+def cart(update: Update, context: CallbackContext):
+    # get all items from cart
+    items = cartDB.get_items(update.effective_user.id)
+    # keyboards
+    text = '<b>Available Items in Cart</b>\n\n'
+    n = 1
+    total = 0
+    for item in items:
+        product = smartphonesDB.get_smartphone(item['brend'], item['phone'])
+        text += f"{n}. {product['name']} costs {product['price']}\n"
+        total += product['price']
+        n += 1
+    
+    text += f"\nTotal: {total}"
+    
+    Keyboard = [
+        [InlineKeyboardButton('Buy', callback_data='buy'), InlineKeyboardButton('Clear', callback_data='clear')]
+    ]
+    update.message.reply_html(
+        text=text,
+        reply_markup=InlineKeyboardMarkup(Keyboard)
     )
